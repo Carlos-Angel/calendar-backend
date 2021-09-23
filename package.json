@@ -1,0 +1,28 @@
+{
+  "name": "calendar-backend",
+  "version": "1.0.0",
+  "description": "backend de la aplicación calendar",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carlos-Angel/calendar-backend.git"
+  },
+  "keywords": [],
+  "author": "Carlos Alberto Angel Angel <c.a.a.a.503@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Carlos-Angel/calendar-backend/issues"
+  },
+  "homepage": "https://github.com/Carlos-Angel/calendar-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.12"
+  }
+}
