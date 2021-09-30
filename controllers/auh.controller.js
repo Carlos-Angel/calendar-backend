@@ -73,8 +73,23 @@ const login = async (req = request, res = response, next) => {
   }
 };
 
-const resetToken = (req = request, res = response, next) => {
-  res.json({ msg: 'reset token' });
+const resetToken = async (req = request, res = response, next) => {
+  const { uid, name } = req.user;
+  try {
+    const token = await generateJwt(uid, name);
+
+    return res.json({
+      ok: true,
+      msg: 'reset token',
+      token,
+    });
+  } catch (error) {
+    debug(error.message);
+    return res.status(500).json({
+      ok: false,
+      msg: 'internal server error',
+    });
+  }
 };
 
 module.exports = {

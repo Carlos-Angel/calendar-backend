@@ -14,6 +14,14 @@ const generateJwt = async (uid, name) => {
   }
 };
 
+const compareJwt = async (token) => {
+  const verifyPromise = util.promisify(jwt.verify);
+  const payload = await verifyPromise(token, process.env.JWT_SECRET);
+
+  return payload;
+};
+
 module.exports = {
   generateJwt,
+  compareJwt,
 };

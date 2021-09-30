@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 const authController = require('../controllers/auh.controller');
 const router = Router();
 const { fieldValidator } = require('../middlewares/field-validator');
+const { jwtValidator } = require('../middlewares/jwt-validator');
 
 /** rutas: /api/auth */
 
@@ -29,6 +30,6 @@ router.post(
   ],
   authController.login,
 );
-router.get('/reset-token', authController.resetToken);
+router.get('/reset-token', jwtValidator, authController.resetToken);
 
 module.exports = router;
