@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const authController = require('../controllers/auh.controller');
 const router = Router();
+const { fieldValidator } = require('../middlewares/field-validator');
 
 /** rutas: /api/auth */
 
@@ -13,6 +14,7 @@ router.post(
     check('password', 'password must be than 5 characters. ').isLength({
       min: 6,
     }),
+    fieldValidator,
   ],
   authController.signIn,
 );
@@ -23,6 +25,7 @@ router.post(
     check('password', 'password must be than 5 characters. ').isLength({
       min: 6,
     }),
+    fieldValidator,
   ],
   authController.login,
 );
