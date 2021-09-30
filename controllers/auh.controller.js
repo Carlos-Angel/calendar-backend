@@ -2,6 +2,7 @@ const { request, response } = require('express');
 const bcrypt = require('bcryptjs');
 const debug = require('debug')('calendar:auth');
 const User = require('../models/User.model');
+const { generateJwt } = require('../helpers/jwt');
 
 const signIn = async (req = request, res = response, next) => {
   const user = new User(req.body);
@@ -19,6 +20,14 @@ const signIn = async (req = request, res = response, next) => {
     user.password = bcrypt.hashSync(user.password, salt);
 
     await user.save();
+
+    const token = await generateJwt(user._id, user.name);
+
+    return res.json({
+      ok: true,
+      msg: 'user created',
+      token,
+    });
   } catch (error) {
     debug(error.message);
     return res.status(500).json({
@@ -26,14 +35,6 @@ const signIn = async (req = request, res = response, next) => {
       msg: 'internal server error',
     });
   }
-
-  // TODO: generar token
-
-  res.json({
-    ok: true,
-    msg: 'user created',
-    data: user,
-  });
 };
 
 const login = async (req = request, res = response, next) => {
@@ -56,13 +57,12 @@ const login = async (req = request, res = response, next) => {
       });
     }
 
-    // TODO: generar token
+    const token = await generateJwt(user._id, user.name);
 
     return res.json({
       ok: true,
       msg: 'login successfully',
-      uid: user._id,
-      name: user.name,
+      token,
     });
   } catch (error) {
     debug(error.message);
