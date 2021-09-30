@@ -6,6 +6,9 @@ const app = express();
 
 app.use(express.static('public' ));
 
+/** middlewares */
+app.use(express.json());
+
 /** routes */
 app.use('/api/auth', auth)
 
