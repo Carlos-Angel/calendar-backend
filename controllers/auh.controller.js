@@ -26,6 +26,9 @@ const signIn = async (req = request, res = response, next) => {
       msg: 'internal server error',
     });
   }
+
+  // TODO: generar token
+
   res.json({
     ok: true,
     msg: 'user created',
@@ -33,8 +36,41 @@ const signIn = async (req = request, res = response, next) => {
   });
 };
 
-const login = (req = request, res = response, next) => {
-  res.json({ msg: 'login' });
+const login = async (req = request, res = response, next) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'email or password not valid',
+      });
+    }
+
+    const validPassword = bcrypt.compareSync(password, user.password);
+    if (!validPassword) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'email or password not valid',
+      });
+    }
+
+    // TODO: generar token
+
+    return res.json({
+      ok: true,
+      msg: 'login successfully',
+      uid: user._id,
+      name: user.name,
+    });
+  } catch (error) {
+    debug(error.message);
+    return res.status(500).json({
+      ok: false,
+      msg: 'internal server error',
+    });
+  }
 };
 
 const resetToken = (req = request, res = response, next) => {
