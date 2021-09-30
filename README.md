@@ -14,7 +14,15 @@ add environment variables
 ```shell
 ###> general ###
 PORT=3001
+NODE_ENV='development'
 ### general <###
+
+###> mongo ###
+MONGO_USER="user"
+MONGO_PASSWORD="password"
+MONGO_HOST="cluster.mongo.net"
+MONGO_NAME="database"
+### mongo <###
 ```
 
 install dependencies
@@ -23,11 +31,11 @@ install dependencies
 npm install
 ```
 
-mode production
+## `production`
 ```bash
 npm start
 ```
-mode development
+## `development`
 
 ```bash
 npm run dev
