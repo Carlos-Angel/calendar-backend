@@ -4,8 +4,8 @@
   "description": "backend de la aplicación calendar",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "DEBUG=calendar* node index.js",
+    "dev": "DEBUG=calendar* nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/Carlos-Angel/calendar-backend#readme",
   "dependencies": {
+    "debug": "^2.6.9",
     "express": "^4.17.1",
-    "express-validator": "^6.12.2"
+    "express-validator": "^6.12.2",
+    "mongoose": "^6.0.8"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
