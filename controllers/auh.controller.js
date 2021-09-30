@@ -26,6 +26,7 @@ const signIn = async (req = request, res = response, next) => {
   res.json({
     ok: true,
     msg: 'user created',
+    data: user
   });
 };
 
