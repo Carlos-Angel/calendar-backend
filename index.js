@@ -1,10 +1,12 @@
 const debug = require("debug")("calendar:app");
 const express = require('express');
+const cors = require('cors');
 const { port } = require('./config');
 const connectionDB = require("./lib/mongo");
 const auth = require('./routes/auth');
 
 const app = express();
+app.use(cors());
 
 app.use(express.static('public' ));
 

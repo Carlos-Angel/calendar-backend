@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Carlos-Angel/calendar-backend#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "express": "^4.17.1",
     "express-validator": "^6.12.2",
