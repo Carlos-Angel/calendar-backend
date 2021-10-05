@@ -2,8 +2,25 @@ const { request, response } = require('express');
 const debug = require('debug')('calendar:event');
 const Event = require('../models/Event.model');
 
-const getEvents = (req = request, res = response, next) => {
-  return res.json({ ok: true, msg: 'getEvents' });
+const getEvents = async (req = request, res = response, next) => {
+  try {
+    const events = await Event.find({ user: req.user.uid }).populate(
+      'user',
+      'name',
+    );
+    return res.json({
+      ok: true,
+      msg: 'events listed',
+      events,
+    });
+  } catch (error) {
+    debug(error.message);
+
+    return res.status(500).json({
+      ok: false,
+      msg: 'internal server error',
+    });
+  }
 };
 
 const getEvent = (req = request, res = response, next) => {
