@@ -23,8 +23,26 @@ const getEvents = async (req = request, res = response, next) => {
   }
 };
 
-const getEvent = (req = request, res = response, next) => {
-  return res.json({ ok: true, msg: 'getEvent' });
+const getEvent = async (req = request, res = response, next) => {
+  const eventId = req.params.id;
+  try {
+    const event = await Event.findOne({
+      _id: eventId,
+      user: req.user.uid,
+    }).populate('user', 'name');
+    return res.json({
+      ok: true,
+      msg: 'events found',
+      event,
+    });
+  } catch (error) {
+    debug(error.message);
+
+    return res.status(500).json({
+      ok: false,
+      msg: 'internal server error',
+    });
+  }
 };
 
 const addEvent = async (req = request, res = response, next) => {
