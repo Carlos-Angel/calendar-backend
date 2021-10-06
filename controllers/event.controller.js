@@ -49,8 +49,29 @@ const addEvent = async (req = request, res = response, next) => {
   }
 };
 
-const updateEvent = (req = request, res = response, next) => {
-  return res.json({ ok: true, msg: 'updateEvent' });
+const updateEvent = async (req = request, res = response, next) => {
+  const eventId = req.params.id;
+  const user = req.user;
+  const data = req.body;
+  try {
+    const event = await Event.findOne({ _id: eventId, user: user.uid });
+
+    if (!event) {
+      return res.status(404).json({ ok: false, msg: 'event not found' });
+    }
+
+    const eventUpdated = await Event.findByIdAndUpdate(eventId, data, {
+      new: true,
+    });
+
+    return res.json({ ok: true, msg: 'event updated', event: eventUpdated });
+  } catch (error) {
+    debug(error.message);
+    return res.status(500).json({
+      ok: false,
+      msg: 'internal server error',
+    });
+  }
 };
 
 const deleteEvent = (req = request, res = response, next) => {
