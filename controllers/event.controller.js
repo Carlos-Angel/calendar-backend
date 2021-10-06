@@ -74,8 +74,26 @@ const updateEvent = async (req = request, res = response, next) => {
   }
 };
 
-const deleteEvent = (req = request, res = response, next) => {
-  return res.json({ ok: true, msg: 'deleteEvent' });
+const deleteEvent = async (req = request, res = response, next) => {
+  const eventId = req.params.id;
+  const user = req.user;
+  try {
+    const event = await Event.findOne({ _id: eventId, user: user.uid });
+
+    if (!event) {
+      return res.status(404).json({ ok: false, msg: 'event not found' });
+    }
+
+    await Event.findByIdAndDelete(eventId);
+
+    return res.json({ ok: true, msg: 'event removed' });
+  } catch (error) {
+    debug(error.message);
+    return res.status(500).json({
+      ok: false,
+      msg: 'internal server error',
+    });
+  }
 };
 
 module.exports = {
