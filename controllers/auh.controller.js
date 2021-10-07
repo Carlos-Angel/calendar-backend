@@ -27,6 +27,7 @@ const signIn = async (req = request, res = response, next) => {
       ok: true,
       msg: 'user created',
       token,
+      user: { uid: user._id, name: user.name },
     });
   } catch (error) {
     debug(error.message);
@@ -63,6 +64,7 @@ const login = async (req = request, res = response, next) => {
       ok: true,
       msg: 'login successfully',
       token,
+      user: { uid: user._id, name: user.name },
     });
   } catch (error) {
     debug(error.message);
