@@ -84,6 +84,7 @@ const resetToken = async (req = request, res = response, next) => {
       ok: true,
       msg: 'reset token',
       token,
+      user: { uid, name },
     });
   } catch (error) {
     debug(error.message);
