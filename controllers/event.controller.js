@@ -29,10 +29,11 @@ const getEvent = async (req = request, res = response, next) => {
     const event = await Event.findOne({
       _id: eventId,
       user: req.user.uid,
-    }).populate('user', 'name');
+    });
+
     return res.json({
       ok: true,
-      msg: 'events found',
+      msg: 'event found',
       event,
     });
   } catch (error) {
