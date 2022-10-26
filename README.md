@@ -1,42 +1,28 @@
-# calendar backend
-backend de la aplicación [calendar](https://github.com/Carlos-Angel/calendar)
+# calendar api
+
+api de la aplicación [calendar](https://github.com/Carlos-Angel/calendar)
 
 ## getting started
 
-copy .env.example file to .env
-
 ```bash
-cp .env.example .env
+# instalar dependencias
+yarn install
+
+# modo desarrollo
+yarn dev
+
+# modo producción
+yarn start
 ```
 
-add environment variables
+## Contenedores
 
-```shell
-###> general ###
-PORT=3001
-NODE_ENV='development'
-### general <###
+- contenedor con la versión de mongo 5.0.0
 
-###> mongo ###
-MONGO_USER="user"
-MONGO_PASSWORD="password"
-MONGO_HOST="cluster.mongo.net"
-MONGO_NAME="database"
-### mongo <###
-```
+## Instrucciones
 
-install dependencies
-
-```bash
-npm install
-```
-
-## `production`
-```bash
-npm start
-```
-## `development`
-
-```bash
-npm run dev
-```
+- `make build` para construir los contenedores
+- `make start` para iniciar los contenedores
+- `make stop` para detener los contenedores
+- `make restart` para reiniciar los contenedores
+  Footer
