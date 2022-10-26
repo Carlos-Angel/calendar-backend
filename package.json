@@ -4,6 +4,7 @@
   "description": "backend de la aplicación calendar",
   "main": "index.js",
   "scripts": {
+    "postinstall": "husky install",
     "start": "DEBUG=calendar* node index.js",
     "dev": "DEBUG=calendar* nodemon index.js"
   },
