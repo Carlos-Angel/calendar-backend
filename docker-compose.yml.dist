@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  calendar-mongo:
+    container_name: calendar-mongo
+    image: mongo:5.0.0
+    ports:
+      - 27017:27017
+    volumes:
+      - calendar-mongo-data:/data/db
+    networks:
+      - calendar-network
+
+volumes:
+  calendar-mongo-data:
+
+networks:
+  calendar-network:
