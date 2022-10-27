@@ -20,7 +20,7 @@ router.post(
   authController.signIn,
 );
 router.post(
-  '/login',
+  '/',
   [
     check('email', 'email not valid').isEmail(),
     check('password', 'password must be than 5 characters. ').isLength({
