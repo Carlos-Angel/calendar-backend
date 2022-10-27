@@ -30,6 +30,6 @@ router.post(
   ],
   authController.login,
 );
-router.get('/reset-token', jwtValidator, authController.resetToken);
+router.get('/renew', jwtValidator, authController.resetToken);
 
 module.exports = router;
