@@ -8,7 +8,7 @@ const { jwtValidator } = require('../middlewares/jwt-validator');
 /** rutas: /api/auth */
 
 router.post(
-  '/sign-in',
+  '/new',
   [
     check('name', 'name is required').not().isEmpty(),
     check('email', 'email not valid').isEmail(),
