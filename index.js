@@ -16,7 +16,7 @@ app.use(express.json());
 
 /** routes */
 app.use('/api/auth', auth);
-app.use('/api/event', event);
+app.use('/api/events', event);
 
 app.listen(port, async () => {
   await connectionDB();
