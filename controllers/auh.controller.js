@@ -23,7 +23,7 @@ const signIn = async (req = request, res = response, next) => {
 
     const token = await generateJwt(user._id, user.name);
 
-    return res.json({
+    return res.status(201).json({
       ok: true,
       msg: 'user created',
       token,
@@ -60,7 +60,7 @@ const login = async (req = request, res = response, next) => {
 
     const token = await generateJwt(user._id, user.name);
 
-    return res.json({
+    return res.status(201).json({
       ok: true,
       msg: 'login successfully',
       token,
@@ -80,7 +80,7 @@ const resetToken = async (req = request, res = response, next) => {
   try {
     const token = await generateJwt(uid, name);
 
-    return res.json({
+    return res.status(201).json({
       ok: true,
       msg: 'reset token',
       token,
